@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,6 +12,7 @@ namespace SpringBlog.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+       
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -16,12 +20,20 @@ namespace SpringBlog.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        [MaxLength(30)]
+        public string DisplayName { get; set; } //tam ad full name biz tanımladık
+
+        public virtual ICollection<Post> Posts { get; set; } //her yazarın yazısı olur
+
+       
     }
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ApplicationDbContext", throwIfV1Schema: false)
         {
         }
 
@@ -29,5 +41,19 @@ namespace SpringBlog.Models
         {
             return new ApplicationDbContext();
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Post>() //bir post entity sinin
+                .HasRequired(x => x.Category) //kategorileri vardır zorunlu
+                .WithMany(x => x.Posts) //birden çok postu vardır
+                .HasForeignKey(x => x.CategoryId) //her postun foreinkey olarak kategori id si vardır
+                .WillCascadeOnDelete(false); //kategori sildiğinde postlarını silme
+
+            base.OnModelCreating(modelBuilder);
+        }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Post> Posts { get; set; }
+
     }
 }
