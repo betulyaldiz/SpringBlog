@@ -31,20 +31,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                    
+                    <li class="nav-item ">
+                        @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+
+                    <li class="nav-item ">
+                        @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
                     </li>
                 </ul>
             </div>
@@ -82,31 +78,8 @@
                     <h5 class="card-header">Categories</h5>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Web Design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Freebies</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">JavaScript</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">CSS</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tutorials</a>
-                                    </li>
-                                </ul>
+                            <div class="col">
+                               @Html.Action("CategoriesPartial","Home") @*home controller da categories partial*@
                             </div>
                         </div>
                     </div>

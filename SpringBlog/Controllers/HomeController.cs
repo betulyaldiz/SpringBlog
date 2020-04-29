@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SpringBlog.Models;
+using SpringBlog.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,11 +8,16 @@ using System.Web.Mvc;
 
 namespace SpringBlog.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
-            return View();
+            var vm = new HomeIndexViewModel
+            {
+                Posts = db.Posts.OrderByDescending(x => x.CreateTime).ToList()
+
+             };
+            return View(vm);
         }
 
         public ActionResult About()
@@ -26,5 +33,12 @@ namespace SpringBlog.Controllers
 
             return View();
         }
+        public ActionResult CategoriesPartial()
+        {
+            var cats = db.Categories.OrderBy(x => x.CategoryName).ToList();
+           return PartialView("_CategoriesPartial",cats);
+        }
+
+         
     }
 }
