@@ -1,9 +1,7 @@
 ﻿@model HomeIndexViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home Page";
 }
-
-<h2>Home</h2>
 
 
 <h1 class="my-4">
@@ -20,7 +18,7 @@
 
             @Html.Raw(post.Content)
             
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            <a href="@Url.Action("Show","Post",new { slug=post.Slug})" class="btn btn-primary">Read More &rarr;</a>
         </div>
         <div class="card-footer text-muted">
             Posted on @post.CreateTime.Value.ToShortDateString() by

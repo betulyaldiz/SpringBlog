@@ -28,7 +28,7 @@ namespace SpringBlog.Migrations
                 manager.Create(role);
             }
 
-            if (!context.Users.Any(u => u.UserName == "yigith1@gmail.com"))
+            if (!context.Users.Any(u => u.UserName == "betulbulut94@gmail.com"))
             {
                 var store = new UserStore<ApplicationUser>(context);
                 var manager = new UserManager<ApplicationUser>(store);
