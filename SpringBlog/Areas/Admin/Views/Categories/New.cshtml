@@ -1,0 +1,44 @@
+﻿@model Category
+@{
+    ViewBag.Title = "New Category";
+}
+
+<h2>New Category</h2>
+<div class="container-fluid"> @*tam oturması için fluid kaplasın*@
+    <div class="row">
+        <div class="col-md-6">
+            @*tabletse yarısı tabletten küçükse tamamını kapla*@
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Quick Example</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                @using (Html.BeginForm("New", "Categories", FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.CategoryName)
+                            @Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control", placeholder = "Category Name" })
+                            @Html.ValidationMessageFor(x => x.CategoryName, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                }
+
+            </div>
+            <div class="col-md-6 form-inline">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Title)
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control", placeholder = "Short URL" })
+                    @Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+

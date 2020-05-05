@@ -2,4 +2,10 @@
     padding-top: 56px;    
 }
 
+.blog-post img {
+    max-width: 100%;
+}
 
+.show-post img {
+    max-width: 100%;
+}
