@@ -74,6 +74,12 @@ namespace SpringBlog.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
+            if (category.Posts.Count>0)
+            {
+                TempData["ErrorMessage"] = "A Category mustn't contain any posts in order to be deleted.";
+                return RedirectToAction("Index");
+
+            }
             db.Categories.Remove(category);
             db.SaveChanges();
             TempData["SuccessMessage"] = "The Category deleted successfully.";

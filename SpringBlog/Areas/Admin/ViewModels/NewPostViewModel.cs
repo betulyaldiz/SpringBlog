@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpringBlog.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,8 +21,14 @@ namespace SpringBlog.Areas.Admin.ViewModels
         [AllowHtml]
         public string Content { get; set; }
 
-        public string PhotoPath { get; set; } //Resim yolu
+        [PostedImage]
+        public HttpPostedFileBase FeaturedImage { get; set; } //Resim yolu
 
-       
+        [Required]
+        [Display(Name ="Short Url")]
+        [StringLength(200)]
+        public string Slug { get; set; }
+
+
     }
 }
