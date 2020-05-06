@@ -1,17 +1,18 @@
 ﻿$(function () {
     bsCustomFileInput.init();
 
-	$('table[data-table="true"]').DataTable({
-		"responsive": true,
-		"autoWidth": false
-	});
-
-	$('textarea[data-snote="true"]').summernote({
-		height: 200
+    $('table[data-table="true"]').DataTable({
+        "responsive": true,
+        "autoWidth": false,
     });
 
+    $('textarea[data-snote="true"]').summernote({
+        height: 200
+    });
+
+
     // https://getbootstrap.com/docs/4.4/components/modal/#via-javascript
-    $("[data-delete-id]").click(function (event) {
+    $("body").on("click", "[data-delete-id]", function (event) {
         event.preventDefault();
         var button = $(this); // Button that triggered the modal
         var id = button.data('delete-id') // Extract info from data-* attributes
@@ -23,4 +24,3 @@
         $("#deleteModal").modal();
     });
 });
-

@@ -3,7 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 
-
 <h1 class="my-4">
     My Blog Posts
 </h1>
@@ -14,7 +13,6 @@
     <div class="card mb-4 blog-post">
         @if (!string.IsNullOrEmpty(post.PhotoPath))
         {
-
             <img class="card-img-top" src="@Url.FeaturedImage(post.PhotoPath)" alt="Card image cap">
         }
         <div class="card-body">
@@ -24,17 +22,14 @@
                 @Html.Raw(post.Content)
             </div>
 
-            <a href="@Url.Action("Show","Post",new { id=post.Id, slug=post.Slug})" class="btn btn-primary">Read More &rarr;</a>
+            <a href="@Url.Action("Show","Post", new { id = post.Id, slug = post.Slug })" class="btn btn-primary mt-3">Read More &rarr;</a>
         </div>
         <div class="card-footer text-muted">
             Posted on @post.CreateTime.Value.ToShortDateString() by
             <a href="#">@(post.Author.DisplayName ?? "Anonymous")</a>
         </div>
     </div>
-
 }
-
-    <
 
 <!-- Pagination -->
 <ul class="pagination justify-content-center mb-4">
@@ -45,6 +40,8 @@
         <a class="page-link" href="#">Newer &rarr;</a>
     </li>
 </ul>
+
+
 
 @section scripts {
     <script>

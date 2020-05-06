@@ -11,33 +11,32 @@ namespace SpringBlog.Models
     {
         public int Id { get; set; }
 
+        [Required]
         [ForeignKey("Author")]
-        [Required] //post yazarsız olamaz
-        public string AuthorId { get; set; } // yazar id sadece author id string
+        public string AuthorId { get; set; }
 
         public int CategoryId { get; set; }
 
         [Required]
         [MaxLength(200)]
         public string Title { get; set; }
-        
+
         public string Content { get; set; }
 
-        public string PhotoPath { get; set; } //Resim yolu
+        public string PhotoPath { get; set; }
 
         [Required]
         [MaxLength(200)]
         public string Slug { get; set; }
 
+        [Required]
+        public DateTime? CreateTime { get; set; }
 
         [Required]
-        public DateTime? CreateTime { get; set; } //(? nullable) null kabul etmiyor
+        public DateTime? ModificationTime { get; set; }
 
-        [Required]
-        public DateTime? ModificationTime { get; set; } //değişiklik zamanı
 
         public virtual ApplicationUser Author { get; set; }
-        public virtual Category Category { get; set; } //her postun bir kategorisi olacak
-
+        public virtual Category Category { get; set; }
     }
 }

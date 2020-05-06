@@ -10,8 +10,6 @@ namespace SpringBlog.Areas.Admin.ViewModels
 {
     public class NewPostViewModel
     {
-        public int Id { get; set; }
-                
         public int CategoryId { get; set; }
 
         [Required]
@@ -22,13 +20,11 @@ namespace SpringBlog.Areas.Admin.ViewModels
         public string Content { get; set; }
 
         [PostedImage]
-        public HttpPostedFileBase FeaturedImage { get; set; } //Resim yolu
+        public HttpPostedFileBase FeaturedImage { get; set; }
 
         [Required]
-        [Display(Name ="Short Url")]
+        [Display(Name = "Short Url")]
         [StringLength(200)]
         public string Slug { get; set; }
-
-
     }
 }
