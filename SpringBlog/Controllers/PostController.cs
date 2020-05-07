@@ -8,22 +8,22 @@ namespace SpringBlog.Controllers
 {
     public class PostController : BaseController
     {
-        //GET: article/372/sample-post-1
-
+        // GET: article/372/sample-post-1
         [Route("p/{id}/{slug?}")]
-        public ActionResult Index(int id, string slug)
+        public ActionResult Show(int id, string slug)
         {
             var post = db.Posts.Find(id);
 
-            if (post.Slug == null)
+            if (post == null)
             {
                 return HttpNotFound();
             }
+
             if (post.Slug != slug)
             {
                 return RedirectToAction("Show", new { id = id, slug = post.Slug });
-
             }
+
             return View(post);
         }
     }

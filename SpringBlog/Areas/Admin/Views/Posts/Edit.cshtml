@@ -1,15 +1,19 @@
-﻿@model NewPostViewModel
+﻿@model EditPostViewModel
 @{
-    ViewBag.Title = "New Post";
+    ViewBag.Title = "Edit Post";
 }
 
-@using (Html.BeginForm("New", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.CurrentFeaturedImage)
+    @Html.HiddenFor(x => x.CreateTime)
+    @Html.HiddenFor(x => x.ModificationTime)
 
     <div class="card card-primary">
         <div class="card-header">
-            <h3 class="card-title">Create a New Post</h3>
+            <h3 class="card-title">Edit the Post</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -30,14 +34,23 @@
             <div class="form-group">
                 @Html.TextAreaFor(x => x.Content, new { @class = "form-control", data_snote = "true" })
                 @Html.ValidationMessageFor(x => x.Content, null, new { @class = "text-danger" })
+                <div class="small text-right">
+                    @Html.LabelFor(x => x.CreateTime)
+                    @Html.DisplayFor(x => x.CreateTime)
+
+                    @Html.LabelFor(x => x.ModificationTime, new { @class = "ml-1" })
+                    @Html.DisplayFor(x => x.ModificationTime)
+                </div>
             </div>
-            <div class="row">
+            <div class="row form-group">
                 <div class="col-md-6 form-inline my-1">
                     <label for="exampleInputFile">Featured Image</label>
                     <div class="input-group flex-fill ml-2">
                         <div class="custom-file">
                             <input type="file" name="FeaturedImage" class="custom-file-input" id="exampleInputFile">
-                            <label class="custom-file-label justify-content-start" for="exampleInputFile">Choose file</label>
+                            <label class="custom-file-label justify-content-start" for="exampleInputFile">
+                                @(string.IsNullOrEmpty(Model.CurrentFeaturedImage) ? "Choose file" : Model.CurrentFeaturedImage)
+                            </label>
                         </div>
                     </div>
                     @Html.ValidationMessage("FeaturedImage", null, new { @class = "text-danger ml-1" })
@@ -54,7 +67,7 @@
         <div class="card-footer">
             <div class="float-left">
                 <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </div>
         <!-- /.card-footer -->

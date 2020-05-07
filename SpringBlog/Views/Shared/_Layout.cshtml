@@ -1,55 +1,46 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="h-100">
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="My Blog Website">
-    <meta name="author" content="Betül Yaldız">
+    <meta name="description" content="A Blog Website">
+    <meta name="author" content="Yiğit Hacıefendioğlu">
 
     <title>Spring Blog - @ViewBag.Title</title>
 
     <!-- Bootstrap core CSS -->
-    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
-    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/bootstrap")
 
 
     <!-- Custom styles for this template -->
     @Styles.Render("~/Content/css")
+
 </head>
 
-<body class="d-flex flex-column h-100" >
+<body class="d-flex flex-column h-100">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            @Html.ActionLink("SpringBlog", "Index", "Home", null, new { @class = "navbar-brand" })
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
                     </li>
-
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
                     </li>
-
-                    <li class="nav-item ">
+                    <li class="nav-item">
                         @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
                     </li>
-
-                    @*@if (User.IsInRole("admin"))
-                    {
-                        <li class="nav-item">
-                            @Html.ActionLink("Administration", "Index", "Dashboard", new { area = "Admin" }, new { @class = "nav-link" })
-                        </li>
-                    }*@
                 </ul>
+
                 @Html.Partial("_LoginPartial")
 
                 <ul class="navbar-nav">
@@ -81,24 +72,29 @@
 
         <div class="row">
 
-            <!-- Blog Entries Column -->   @*//merkezi kısım sitede*@
-            <div class="col-md-8 py-4">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8 py-4 d-flex flex-column">
+
                 @RenderBody()
+
             </div>
 
-            <!-- Sidebar Widgets Column --> @*//sağ sütun*@
+            <!-- Sidebar Widgets Column -->
             <div class="col-md-4">
 
                 <!-- Search Widget -->
                 <div class="card my-4">
                     <h5 class="card-header">Search</h5>
                     <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
-                        </div>
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { id = "frmSearch" }))
+                        {
+                            <div class="input-group">
+                                @Html.TextBox("q", null, new { @class = "form-control", placeholder = "Search for..." })
+                                <span class="input-group-append">
+                                    <button class="btn btn-secondary" type="submit">Go!</button>
+                                </span>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -108,7 +104,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                               @Html.Action("CategoriesPartial","Home") @*home controller da categories partial*@
+                                @Html.Action("CategoriesPartial", "Home", new { area = "" })
                             </div>
                         </div>
                     </div>
@@ -138,11 +134,12 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script> sürüklediğimiz scriptler yerine bundle kullandık (bundleconfig)*@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Site.js"></script>
 
     @RenderSection("scripts", false)
+
 </body>
 
 </html>
